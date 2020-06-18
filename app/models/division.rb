@@ -83,7 +83,7 @@ class Division < ApplicationRecord
     )
          .group('teams.id')
          .select(
-           'COALESCE(sum(challenges.point_value), 0) + COALESCE(sum(point_feed_items.point_value), 0)
+           'COALESCE(sum(DISTINCT challenges.point_value), 0) + COALESCE(sum(DISTINCT point_feed_items.point_value), 0)
              as team_score,
            GREATEST(MAX(pentest_feed_items.created_at), MAX(point_feed_items.created_at)) as last_solve_time, teams.*'
          )
